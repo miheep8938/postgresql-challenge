@@ -16,6 +16,9 @@ CREATE TABLE "Employees" (
      )
 );
 
+SELECT *
+FROM "Employees";
+
 CREATE TABLE "Departments_Employees" (
     "dept_number" VARCHAR   NOT NULL,
     "employee_number" INT   NOT NULL,
@@ -62,3 +65,6 @@ REFERENCES "Employees" ("employee_number");
 ALTER TABLE "Department_Manager" ADD CONSTRAINT "fk_Department_Manager_dept_number" FOREIGN KEY("dept_number")
 REFERENCES "Departments_Employees" ("dept_number");
 
+----------------------------------------------------------------------------------
+
+-- Question Number 1: List the following details of each employee: employee number, last name, first name, sex, and salary
