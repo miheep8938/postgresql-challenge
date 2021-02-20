@@ -1,7 +1,7 @@
 Employees 
 -
-employee_number PK INT
-employee_title VARCHAR
+emp_no PK INT
+emp_title VARCHAR
 bith_date DATE
 first_name VARCHAR
 last_name VARCHAR
@@ -10,25 +10,25 @@ hire_date DATE
 
 Departments_Employees
 -
-dept_number PK VARCHAR
-employee_number INT FK >- Employees.employee_number
+emp_no INT FK >- Employees.emp_no
+dept_no VARCHAR
 
 Titles
 -
-title_id VARCHAR FK >- Employees.employee_title
+title_id VARCHAR FK >- Employees.emp_title
 title VARCHAR 
 
 Salaries 
 -
-employee_number INT FK >- Employees.employee_number
+emp_no INT FK >- Employees.emp_no
 salary INT
 
 Departments
 -
-dept_number VARCHAR FK >- Departments_Employees.dept_number
+dept_no VARCHAR FK >- Departments_Employees.dept_no
 dept_name VARCHAR
 
 Department_Manager
 -
-employee_number INT FK >- Employees.employee_number
-dept_number VARCHAR FK >- Departments_Employees.dept_number
+emp_no INT FK >- Employees.emp_no
+dept_no VARCHAR FK >- Departments_Employees.dept_no
