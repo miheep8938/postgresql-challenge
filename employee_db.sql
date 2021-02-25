@@ -1,5 +1,3 @@
--- Data Engineering 
-
 CREATE TABLE "Employees" (
     "emp_no" INT   NOT NULL,
     "emp_title" VARCHAR   NOT NULL,
@@ -15,7 +13,10 @@ CREATE TABLE "Employees" (
 
 CREATE TABLE "Departments_Employees" (
     "emp_no" INT   NOT NULL,
-    "dept_no" VARCHAR   NOT NULL
+    "dept_no" VARCHAR   NOT NULL,
+    CONSTRAINT "pk_Departments_Employees" PRIMARY KEY (
+        "dept_no"
+     )
 );
 
 CREATE TABLE "Titles" (
@@ -34,8 +35,8 @@ CREATE TABLE "Departments" (
 );
 
 CREATE TABLE "Department_Manager" (
-    "dept_no" VARCHAR   NOT NULL,
-    "emp_no" INT   NOT NULL
+    "emp_no" INT   NOT NULL,
+    "dept_no" VARCHAR   NOT NULL
 );
 
 ALTER TABLE "Departments_Employees" ADD CONSTRAINT "fk_Departments_Employees_emp_no" FOREIGN KEY("emp_no")
@@ -50,11 +51,13 @@ REFERENCES "Employees" ("emp_no");
 ALTER TABLE "Departments" ADD CONSTRAINT "fk_Departments_dept_no" FOREIGN KEY("dept_no")
 REFERENCES "Departments_Employees" ("dept_no");
 
+ALTER TABLE "Department_Manager" ADD CONSTRAINT "fk_Department_Manager_emp_no" FOREIGN KEY("emp_no")
+REFERENCES "Employees" ("emp_no");
+
 ALTER TABLE "Department_Manager" ADD CONSTRAINT "fk_Department_Manager_dept_no" FOREIGN KEY("dept_no")
 REFERENCES "Departments_Employees" ("dept_no");
 
-ALTER TABLE "Department_Manager" ADD CONSTRAINT "fk_Department_Manager_emp_no" FOREIGN KEY("emp_no")
-REFERENCES "Employees" ("emp_no");
+
 --------------------------------------------
 -- Print each file
 SELECT *
@@ -109,9 +112,8 @@ SELECT E.emp_no,E.last_name, E.first_name, "Departments".dept_name, "Departments
 
 -- 5. List first name, last name, and sex for employees whose 
 	-- first name is "Hercules" and last names begin with "B."
-SELECT last_name,first_name, sex FROM "Employees"
-	WHERE first_name = 'Heracule'
-	AND last_name LIKE 'B%';
+SELECT last_name,first_name, sex FROM "Employees" e
+	WHERE first_name = 'Hercules' AND last_name LIKE 'B%';
 
 -- 6. List all employees in the Sales department, including 
 	-- their employee number, last name, first name, and department name.
